@@ -98,10 +98,14 @@ for audio_bestand in audio_bestanden:
 
         # We gaan door elk frame (meting) in het audiobestand.
         for i in range(0, length):
-            # We lezen één frame (meting) van het audiobestand.
+            # Dit initialiseert een lus die door elk frame in het audiobestand gaat. 'length' geeft het totale aantal frames in het audiobestand aan.
+            # We lezen één frame (één meting) van het audiobestand en slaan de binaire gegevens op in de variabele 'wavedata'.
             wavedata = wavefile.readframes(1)
-            # We pakken de binaire gegevens uit en converteren ze naar een decimaal getal.
+            # Hier worden de binaire gegevens ('wavedata') uitgepakt en geconverteerd naar een decimaal getal ('data').
+            # De '<h' geeft aan dat de gegevens worden geïnterpreteerd als een 16-bits signed integer (klein endian).
             data = struct.unpack("<h", wavedata)
+            # Hier wordt het decimale getal ('data[0]') toegewezen aan de variabele 'y'.
+            # Dit vertegenwoordigt de amplitude van het audiobestand op het huidige tijdstip (i).
             y = data[0]
 
             # Als de waarde van het frame 0 is, voegen we een waarde van -60 dB toe om het einde van het signaal aan te geven.
